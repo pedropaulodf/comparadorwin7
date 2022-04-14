@@ -51,6 +51,10 @@ export function Home() {
 
   const handleMerge = () => {
 
+    if(!textarea1 && !textarea2 && !textarea3){
+      return 0;
+    }
+
     setTotalMessage("combinações feitas!");
 
     const arrayTextarea1 = textarea1.split("\n");

@@ -10,7 +10,7 @@ interface TextareaPros {
 
 function TextareaComponent({
   color = "gray",
-  text = "Insira palavras aqui",
+  text = "Insira palavras aqui:",
   handleChange,
   value
 }: TextareaPros) {
