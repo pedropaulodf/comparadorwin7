@@ -1,7 +1,8 @@
 import styles from "./styles.module.scss";
 import logoImg from '../../assets/images/logo.jpg'
+import { memo } from "react";
 
-export function Header() {
+function HeaderComponent() {
 
   return (
     <div className={styles.container}>
@@ -16,3 +17,11 @@ export function Header() {
     </div>
   )
 }
+
+export const Header = memo(
+  HeaderComponent,
+  (prevProps, nextProps) => {
+    // Esse Object.is vai verificar de forma profunda os dois objetos
+    return Object.is(prevProps, nextProps);
+  }
+)

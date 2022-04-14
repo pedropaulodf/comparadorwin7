@@ -14,3 +14,8 @@
     transform: scale(0.9);
   }
 }
+
+.selected {
+  filter: brightness(.97);
+  border: 1px dashed;
+}
