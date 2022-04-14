@@ -1,0 +1,99 @@
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 1rem 2rem;
+  margin: 0 auto;
+
+  .textAreasSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+  .optionsSection {
+    margin: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+    .optionsBox {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .buttonGroup {
+        display: flex;
+        gap: 0.2rem;
+
+        input {
+          width: 64px;
+          border: 2px solid var(--blue);
+          border-radius: 0.7rem;
+          height: 100%;
+          padding: 0.5rem;
+          margin-left: 0.3rem;
+        }
+      }
+    }
+  }
+  .resultSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    p {
+      font-size: 1.8rem;
+      color: #808080;
+      margin-bottom: 1.8rem;
+    }
+
+    button {
+      border-radius: 0.5rem;
+      padding: 0.7rem 2rem;
+      background-color: var(--blue);
+      border: 1px solid var(--blue);
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      transition: transform 0.2s ease-in-out;
+
+      &:hover {
+        filter: brightness(1.2);
+      }
+
+      &:active {
+        transform: translateY(0.5rem);
+      }
+    }
+
+    textarea {
+      max-width: 700px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .textAreasSection {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+  .optionsSection {
+    margin: 2rem 0;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column !important;
+
+    .optionsBox {
+
+      flex-direction: column;
+      .buttonGroup {
+        input {
+          height: 3rem !important;
+          padding: 0.5rem;
+          margin-left: 0 !important;
+        }
+      }
+    }
+  }
+}

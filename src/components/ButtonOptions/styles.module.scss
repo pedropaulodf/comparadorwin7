@@ -1,0 +1,16 @@
+.button{
+  border: none;
+  padding: 0.6rem 1rem;
+  background-color: var(--light-blue);
+  border-radius: 0.5rem;
+  color: var(--blue);
+  font-weight: 500;
+
+  &:hover {
+    filter: brightness(.95);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}

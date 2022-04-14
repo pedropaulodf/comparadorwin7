@@ -1,0 +1,21 @@
+.stripe {
+  display: flex;
+
+  div {
+    width: 25%;
+    height: 0.8rem;
+  }
+
+  .blue {
+    background-color: var(--blue);
+  }
+  .red {
+    background-color: var(--red);
+  }
+  .yellow {
+    background-color: var(--yellow);
+  }
+  .green {
+    background-color: var(--green);
+  }
+}
