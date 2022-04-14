@@ -17,6 +17,7 @@ export function Home() {
   const [textarea2, setTextarea2] = useState("");
   const [textarea3, setTextarea3] = useState("");
   const [textareaMerged, setTextareaMerged] = useState("");
+  const [totalWordsMerged, setTotalWordsMerged] = useState(0);
 
   const handleChangeTextarea1 = (value: string) => {
     setTextarea1(value);
@@ -38,23 +39,21 @@ export function Home() {
     const wrapperRight =
       wrapIn === "quotes" ? '"' : wrapIn === "brackets" ? "]" : "";
 
-    const wordsMerged = arrayTextarea1
-      .map((text1) =>
-        arrayTextarea2.map((text2) =>
-          arrayTextarea3.map(
-            (text3) =>
-              `${wrapperLeft}${separator === "+" ? separator : ""}${text1}${
-                separator === "%" ? customSeparator : separator
-              }${text2}${
-                separator === "%" ? customSeparator : separator
-              }${text3}${wrapperRight}`
-          )
+    const wordsMerged = arrayTextarea1.map((text1) =>
+      arrayTextarea2.map((text2) =>
+        arrayTextarea3.map(
+          (text3) =>
+            `${wrapperLeft}${separator === "+" ? separator : ""}${text1}${
+              separator === "%" ? customSeparator : separator
+            }${text2}${
+              separator === "%" ? customSeparator : separator
+            }${text3}${wrapperRight}`
         )
       )
-      .flat(Infinity)
-      .join("\n");
+    );
 
-    setTextareaMerged(wordsMerged);
+    setTotalWordsMerged(wordsMerged.flat(Infinity).length);
+    setTextareaMerged(wordsMerged.flat(Infinity).join("\n"));
   };
 
   return (
@@ -134,7 +133,7 @@ export function Home() {
           </div>
         </section>
         <section className={styles.resultSection}>
-          <p>1256 combinações feitas!</p>
+          <p>{totalWordsMerged} combinações feitas!</p>
           <button onClick={() => handleMerge()}>Combinar!</button>
           <Textarea
             color="gray"
