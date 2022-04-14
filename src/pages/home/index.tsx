@@ -9,7 +9,7 @@ import styles from "./styles.module.scss";
 export function Home() {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [separator, setSeparator] = useState("");
+  const [separator, setSeparator] = useState(" ");
   const [customSeparator, setCustomSeparator] = useState("");
   const [wrapIn, setWrapIn] = useState("");
   const [totalMessage, setTotalMessage] = useState("combinações feitas!");
@@ -70,11 +70,28 @@ export function Home() {
       arrayTextarea2.map((text2) =>
         arrayTextarea3.map(
           (text3) =>
-            `${wrapperLeft}${separator === "+" ? separator : ""}${text1}${
-              separator === "%" ? customSeparator : separator
-            }${text2}${
-              separator === "%" ? customSeparator : separator
-            }${text3}${wrapperRight}`
+          {
+            switch (separator) {
+              case ' ':
+                return `${wrapperLeft}${text1}${separator}${text2}${separator}${text3}${wrapperRight}`
+                break;
+            
+              case '+':
+                return `${separator}${wrapperLeft}${text1.replace(/ /g,` +`)} ${separator}${text2.replace(/ /g,` +`)} ${separator}${text3.replace(/ /g,` +`)}${wrapperRight}`
+                break;
+            
+              case '-':
+                return `${wrapperLeft}${text1}${separator}${text2}${separator}${text3}${wrapperRight}`
+                break;
+            
+              case '%':
+                return `${wrapperLeft}${text1}${separator === "%" ? customSeparator : separator}${text2}${separator === "%" ? customSeparator : separator}${text3}${wrapperRight}`
+                break;
+            
+              default:
+                return `${wrapperLeft}${text1}${separator}${text2}${separator}${text3}${wrapperRight}`
+            }
+          }
         )
       )
     );

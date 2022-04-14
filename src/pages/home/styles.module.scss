@@ -23,6 +23,8 @@
       .buttonGroup {
         display: flex;
         gap: 0.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
 
         input {
           width: 64px;
@@ -45,6 +47,7 @@
       font-size: 1.8rem;
       color: #808080;
       margin-bottom: 1.8rem;
+      text-align: center;
     }
 
     button {
