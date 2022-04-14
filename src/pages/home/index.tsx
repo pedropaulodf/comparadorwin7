@@ -31,8 +31,9 @@ export function Home() {
   };
 
   useEffect(() => {
-    setTotalWordsMerged(calcPossibleMerges());
-    setTotalMessage("combinações possíveis!");
+    const qttyWordsMerged = calcPossibleMerges();
+    setTotalWordsMerged(qttyWordsMerged);
+    setTotalMessage(qttyWordsMerged === 1 ? "combinação possível!" : "combinações possíveis!");
   }, [textarea1,textarea2,textarea3]);
 
   const calcPossibleMerges = () => {
@@ -54,8 +55,6 @@ export function Home() {
     if(!textarea1 && !textarea2 && !textarea3){
       return 0;
     }
-
-    setTotalMessage("combinações feitas!");
 
     const arrayTextarea1 = textarea1.split("\n");
     const arrayTextarea2 = textarea2.split("\n");
@@ -96,7 +95,10 @@ export function Home() {
       )
     );
 
-    setTotalWordsMerged(wordsMerged.flat(Infinity).length);
+    const qttyWordsMerged = wordsMerged.flat(Infinity).length;
+
+    setTotalMessage(qttyWordsMerged === 1 ? "combinação feita!" : "combinações feitas!");
+    setTotalWordsMerged(qttyWordsMerged);
     setTextareaMerged(wordsMerged.flat(Infinity).join("\n"));
   };
 
