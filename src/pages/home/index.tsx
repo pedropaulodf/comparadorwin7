@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ButtonOptions } from "../../components/ButtonOptions";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
@@ -12,6 +12,7 @@ export function Home() {
   const [separator, setSeparator] = useState("");
   const [customSeparator, setCustomSeparator] = useState("");
   const [wrapIn, setWrapIn] = useState("");
+  const [totalMessage, setTotalMessage] = useState("combinações feitas!");
 
   const [textarea1, setTextarea1] = useState("");
   const [textarea2, setTextarea2] = useState("");
@@ -29,7 +30,29 @@ export function Home() {
     setTextarea3(value);
   };
 
+  useEffect(() => {
+    setTotalWordsMerged(calcPossibleMerges());
+    setTotalMessage("combinações possíveis!");
+  }, [textarea1,textarea2,textarea3]);
+
+  const calcPossibleMerges = () => {
+
+    if(!textarea1 && !textarea2 && !textarea3){
+      return 0;
+    }
+
+    const arrayTextarea1 = textarea1.split("\n");
+    const arrayTextarea2 = textarea2.split("\n");
+    const arrayTextarea3 = textarea3.split("\n");
+    return (
+      arrayTextarea1.length * arrayTextarea2.length * arrayTextarea3.length
+    );
+  };
+
   const handleMerge = () => {
+
+    setTotalMessage("combinações feitas!");
+
     const arrayTextarea1 = textarea1.split("\n");
     const arrayTextarea2 = textarea2.split("\n");
     const arrayTextarea3 = textarea3.split("\n");
@@ -133,7 +156,7 @@ export function Home() {
           </div>
         </section>
         <section className={styles.resultSection}>
-          <p>{totalWordsMerged} combinações feitas!</p>
+          <p>{totalWordsMerged} {totalMessage}</p>
           <button onClick={() => handleMerge()}>Combinar!</button>
           <Textarea
             color="gray"
