@@ -12,7 +12,7 @@ function HeaderComponent() {
       <div>
         <h1>Curso de Google Ads</h1>
         <p>Aprenda na prática com passos simples e rápidos de aplicar. Faça já a sua inscrição e aprenda tudo sobre Google Ads</p>
-        <button>Clique aqui e acesse!</button>
+        <a href="https://www.cursos.win7.com.br/curso-ads" target="_blank">Clique aqui e acesse!</a>
       </div>
     </div>
   )

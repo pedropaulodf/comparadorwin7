@@ -26,7 +26,7 @@
       margin-bottom: 1rem;
     }
 
-    button {
+    a {
       width: 100%;
       border-radius: 0.5rem;
       padding: 0.7rem 1rem;
@@ -35,6 +35,7 @@
       color: #fff;
       font-weight: 700;
       transition: all 0.4s;
+      display: block;
 
       &:hover {
         background-color: rgba(0, 0, 0, 0);
