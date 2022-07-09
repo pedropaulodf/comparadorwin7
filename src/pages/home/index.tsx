@@ -33,71 +33,89 @@ export function Home() {
   useEffect(() => {
     const qttyWordsMerged = calcPossibleMerges();
     setTotalWordsMerged(qttyWordsMerged);
-    setTotalMessage(qttyWordsMerged === 1 ? "combinação possível!" : "combinações possíveis!");
-  }, [textarea1,textarea2,textarea3]);
+    setTotalMessage(
+      qttyWordsMerged === 1 ? "combinação possível!" : "combinações possíveis!"
+    );
+  }, [textarea1, textarea2, textarea3]);
 
   const calcPossibleMerges = () => {
-
-    if(!textarea1 && !textarea2 && !textarea3){
+    if (!textarea1 && !textarea2 && !textarea3) {
       return 0;
     }
 
-    const arrayTextarea1 = textarea1.split("\n");
-    const arrayTextarea2 = textarea2.split("\n");
-    const arrayTextarea3 = textarea3.split("\n");
+    const txt1 = textarea1.split("\n").filter((item) => item !== "");
+    const txt2 = textarea2.split("\n").filter((item) => item !== "");
+    const txt3 = textarea3.split("\n").filter((item) => item !== "");
+
+    const arrayTextarea1 = txt1.length === 0 ? [""] : txt1;
+    const arrayTextarea2 = txt2.length === 0 ? [""] : txt2;
+    const arrayTextarea3 = txt3.length === 0 ? [""] : txt3;
+
     return (
       arrayTextarea1.length * arrayTextarea2.length * arrayTextarea3.length
     );
   };
 
   const handleMerge = () => {
-
-    if(!textarea1 && !textarea2 && !textarea3){
+    if (!textarea1 && !textarea2 && !textarea3) {
       return 0;
     }
+    const txt1 = textarea1.split("\n").filter((item) => item !== "");
+    const txt2 = textarea2.split("\n").filter((item) => item !== "");
+    const txt3 = textarea3.split("\n").filter((item) => item !== "");
 
-    const arrayTextarea1 = textarea1.split("\n");
-    const arrayTextarea2 = textarea2.split("\n");
-    const arrayTextarea3 = textarea3.split("\n");
+    const arrayTextarea1 = txt1.length === 0 ? [""] : txt1;
+    const arrayTextarea2 = txt2.length === 0 ? [""] : txt2;
+    const arrayTextarea3 = txt3.length === 0 ? [""] : txt3;
 
     const wrapperLeft =
       wrapIn === "quotes" ? '"' : wrapIn === "brackets" ? "[" : "";
     const wrapperRight =
       wrapIn === "quotes" ? '"' : wrapIn === "brackets" ? "]" : "";
 
-    const wordsMerged = arrayTextarea1.map((text1) =>
-      arrayTextarea2.map((text2) =>
-        arrayTextarea3.map(
-          (text3) =>
-          {
-            switch (separator) {
-              case ' ':
-                return `${wrapperLeft}${text1}${separator}${text2}${separator}${text3}${wrapperRight}`
-                break;
-            
-              case '+':
-                return `${separator}${wrapperLeft}${text1.replace(/ /g,` +`)} ${separator}${text2.replace(/ /g,` +`)} ${separator}${text3.replace(/ /g,` +`)}${wrapperRight}`
-                break;
-            
-              case '-':
-                return `${wrapperLeft}${text1}${separator}${text2}${separator}${text3}${wrapperRight}`
-                break;
-            
-              case '%':
-                return `${wrapperLeft}${text1}${separator === "%" ? customSeparator : separator}${text2}${separator === "%" ? customSeparator : separator}${text3}${wrapperRight}`
-                break;
-            
-              default:
-                return `${wrapperLeft}${text1}${separator}${text2}${separator}${text3}${wrapperRight}`
-            }
+    const wordsMerged = arrayTextarea1.map((text1) => {
+      return arrayTextarea2.map((text2) => {
+        const textMidle = text2 ? `${separator}${text2}` : "";
+        return arrayTextarea3.map((text3) => {
+          const textEnd = text3 ? `${separator}${text3}` : "";
+          switch (separator) {
+            case " ":
+              return `${wrapperLeft}${text1}${textMidle}${textEnd}${wrapperRight}`;
+
+            case "+":
+              return `${separator}${wrapperLeft}${text1.replace(
+                / /g,
+                ` +`
+              )} ${separator}${text2.replace(
+                / /g,
+                ` +`
+              )} ${separator}${text3.replace(
+                / /g,
+                ` +`
+              )}${wrapperRight}`.trim();
+
+            case "-":
+              return `${wrapperLeft}${text1}${separator}${text2}${separator}${text3}${wrapperRight}`.trim();
+
+            case "%":
+              return `${wrapperLeft}${text1}${
+                separator === "%" ? customSeparator : separator
+              }${text2}${
+                separator === "%" ? customSeparator : separator
+              }${text3}${wrapperRight}`.trim();
+
+            default:
+              return `${wrapperLeft}${text1}${separator}${text2}${separator}${text3}${wrapperRight}`.trim();
           }
-        )
-      )
-    );
+        });
+      });
+    });
 
     const qttyWordsMerged = wordsMerged.flat(Infinity).length;
 
-    setTotalMessage(qttyWordsMerged === 1 ? "combinação feita!" : "combinações feitas!");
+    setTotalMessage(
+      qttyWordsMerged === 1 ? "combinação feita!" : "combinações feitas!"
+    );
     setTotalWordsMerged(qttyWordsMerged);
     setTextareaMerged(wordsMerged.flat(Infinity).join("\n"));
   };
@@ -179,7 +197,9 @@ export function Home() {
           </div>
         </section>
         <section className={styles.resultSection}>
-          <p>{totalWordsMerged} {totalMessage}</p>
+          <p>
+            {totalWordsMerged} {totalMessage}
+          </p>
           <button onClick={() => handleMerge()}>Combinar!</button>
           <Textarea
             color="gray"
